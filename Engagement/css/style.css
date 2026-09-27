@@ -39,8 +39,7 @@ h1 .ch{display:inline-block;opacity:0;transform:translateY(16px)}
 .title-flourish{font-family:'Great Vibes',cursive;font-size:15px;color:var(--gold);display:block;letter-spacing:1px;margin-top:-4px;opacity:0}
 .subtitle{font-size:13px;color:#7a776e;font-style:italic;margin:0;opacity:0}
 .names{margin:19px 0 7px;font-size:clamp(38px,10vw,56px);line-height:1.05;color:#b8860b;font-family:'Great Vibes','Cormorant Garamond',Georgia,serif;font-style:normal;font-weight:400;letter-spacing:1px;text-shadow:0 1px 0 #fff8df,0 0 7px rgba(212,169,79,.55),0 0 18px rgba(212,169,79,.32);filter:drop-shadow(0 4px 7px rgba(110,20,35,.16))} 
-.names .line1,.names .line2{background:linear-gradient(105deg,#8f6414 0%,#e6c56d 22%,#fff3b0 38%,#b8860b 55%,#f1d27c 72%,#9b6c16 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:goldShimmer 3.8s linear infinite;text-shadow:none;position:relative}
-@keyframes goldShimmer{0%{background-position:220% center}100%{background-position:-20% center}}
+.names .line1,.names .line2{color:#e6c56d;text-shadow:0 2px 8px rgba(0,0,0,.35);position:relative}
 .names span{display:flex;align-items:center;justify-content:center;gap:12px;color:#d4a94f;font-size:24px;opacity:0;margin:8px 0;text-shadow:0 0 8px rgba(212,169,79,.65)}
 .names .ch{display:inline-block;opacity:0;transform:translateY(10px)}
 .names span{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--gold);font-size:20px;opacity:0;margin:6px 0}
