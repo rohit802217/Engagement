@@ -74,6 +74,106 @@ button:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .sparkle-burst{position:absolute;width:6px;height:6px;border-radius:50%;background:#fff2c8;box-shadow:0 0 8px 2px rgba(255,220,140,.9);opacity:0;pointer-events:none}
 @media(max-width:440px){.invite-card{padding:18px 20px}.ganesha-stage{height:245px}.ganesha{width:300px;height:250px}h1{font-size:40px}.names{font-size:27px}.input-row{flex-direction:column}.input-row button{height:40px}}
 
+/* =========================================================
+   RAHUL & MANISHA — LARGE STATIC NAMES
+   ========================================================= */
+
+.names {
+  margin: 19px 0 7px;
+  font-size: clamp(70px, 18vw, 200px) !important;
+  line-height: 0.95 !important;
+  color: #d4af37 !important;
+  font-family: 'Great Vibes','Cormorant Garamond',Georgia,serif;
+  font-style: normal;
+  font-weight: 400 !important;
+  letter-spacing: 1px;
+
+  /* Gold appearance */
+  text-shadow:
+    0 1px 0 #fff8df,
+    0 0 7px rgba(212,169,79,.55),
+    0 0 18px rgba(212,169,79,.32);
+
+  filter: drop-shadow(0 4px 7px rgba(110,20,35,.16));
+
+  /* IMPORTANT: no animation */
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Rahul */
+.names .line1 {
+  display: inline-block;
+  color: #d4af37 !important;
+  font-weight: 400 !important;
+
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Manisha */
+.names .line2 {
+  display: inline-block;
+  color: #d4af37 !important;
+  font-weight: 400 !important;
+
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Disable character-by-character animation */
+.names .ch {
+  display: inline-block;
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Ampersand / decorative separator */
+.names span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #d4a94f;
+  font-size: 24px;
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+  margin: 8px 0;
+}
+
+/* Mobile — keep names large but prevent overflow */
+@media (max-width: 440px) {
+  .names {
+    font-size: clamp(70px, 20vw, 130px) !important;
+    line-height: 0.95 !important;
+    letter-spacing: 0;
+  }
+
+  .names .line1,
+  .names .line2 {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* Shared invitation mode */
+body.shared-invite .personalize {
+  display: none !important;
+}
+
+
+
 /* Premium couple-name styling */
 .names .line1,
 .names .line2 {
