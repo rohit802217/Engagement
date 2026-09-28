@@ -136,7 +136,7 @@ function buildShareUrl(name) {
 }
 
 function getShareMessage(name) {
-  return `💌 You are invited to Rahul & Manisha's Engagement Ceremony!\nDear ${name}, please open the invitation card below.`;
+  return `💌 Rahul & Manisha's Engagement Invitation\nDear ${name}, tap the invitation card to open.`;
 }
 
 function showGuest(name) {

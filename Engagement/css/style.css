@@ -2008,3 +2008,38 @@ body.shared-invite .share-row{display:none!important}
  .invite-card::before,.invite-card::after{left:7px;right:7px;height:8px}
  .gold-frame{inset:14px}
 }
+
+
+/* ===== Final mobile name-safety fix =====
+   Keep Rahul & Manisha fully inside the card on small phones.
+   Long guest names also wrap instead of being clipped. */
+.invite-card{overflow:visible!important;}
+.names{
+  width:100%!important;
+  max-width:100%!important;
+  overflow:visible!important;
+  padding:0 6px!important;
+  box-sizing:border-box!important;
+}
+.names .line1,
+.names .line2{
+  max-width:100%!important;
+  white-space:nowrap!important;
+  font-size:clamp(42px,13vw,55px)!important;
+  line-height:1!important;
+}
+.guest span{
+  display:inline-block!important;
+  max-width:86%!important;
+  white-space:normal!important;
+  overflow-wrap:break-word!important;
+  word-break:normal!important;
+  vertical-align:middle!important;
+}
+@media(max-width:440px){
+  .names{padding:0 2px!important;}
+  .names .line1,
+  .names .line2{
+    font-size:clamp(40px,12.5vw,50px)!important;
+  }
+}
