@@ -135,12 +135,8 @@ function buildShareUrl(name) {
   }
 }
 
-function getShareMessage(name, shareUrl) {
-  // When hosted, send the invitation URL as the main WhatsApp content.
-  // This makes the recipient open the actual animated invitation card instead
-  // of seeing the invitation text as the whole message.
-  if (shareUrl) return shareUrl;
-  return `Rahul & Manisha's Engagement Ceremony 💍\nOpen the invitation card`;
+function getShareMessage(name) {
+  return `💌 You are invited to Rahul & Manisha's Engagement Ceremony!\nDear ${name}, please open the invitation card below.`;
 }
 
 function showGuest(name) {
@@ -216,31 +212,34 @@ shareBtn?.addEventListener('click', async (event) => {
 
   const name = getGuestName();
   const shareUrl = buildShareUrl(name);
-  const message = getShareMessage(name, shareUrl);
+  const message = getShareMessage(name);
 
-  // Native Share. Do not pass a file:// URL to navigator.share().
-  if (typeof navigator.share === 'function') {
+  // On phones, use the native share sheet first. The URL is passed as the
+  // actual link, not written into the visible invitation text. This lets
+  // WhatsApp generate its rich invitation-card preview from og:image.
+  if (typeof navigator.share === 'function' && shareUrl) {
     try {
       const shareData = {
         title: 'Rahul & Manisha — Engagement Ceremony',
-        text: shareUrl ? `💍 Rahul & Manisha's Engagement Ceremony\nDear ${name}` : message
+        text: message,
+        url: shareUrl
       };
-      if (shareUrl) shareData.url = shareUrl;
 
-      if (typeof navigator.canShare === 'function' && !navigator.canShare(shareData)) {
-        delete shareData.url;
+      if (!navigator.canShare || navigator.canShare(shareData)) {
+        await navigator.share(shareData);
+        return;
       }
-
-      await navigator.share(shareData);
-      return;
     } catch (err) {
       if (err && err.name === 'AbortError') return;
       // Continue to WhatsApp/copy fallback for other browser share errors.
     }
   }
 
-  // WhatsApp fallback.
-  const whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(message);
+  // WhatsApp fallback. A URL is required here so WhatsApp can make the
+  // invitation preview clickable. The normal mobile share path above keeps
+  // the URL out of the visible invitation text.
+  const fallbackMessage = shareUrl ? `${message}\n\n${shareUrl}` : message;
+  const whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(fallbackMessage);
   let opened = false;
   try {
     const popup = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
@@ -249,11 +248,11 @@ shareBtn?.addEventListener('click', async (event) => {
 
   if (opened) return;
 
-  const copied = await copyText(message);
+  const copied = await copyText(fallbackMessage);
   if (copied) {
     showShareMessage(
       shareUrl
-        ? 'Invitation link copied. Paste it in WhatsApp.'
+        ? 'Invitation card link copied. Paste it in WhatsApp.'
         : 'Invitation message copied. Paste it in WhatsApp.'
     );
   } else {
