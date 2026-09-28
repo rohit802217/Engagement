@@ -1,0 +1,1789 @@
+/* =========================================================
+   1. GLOBAL RESET
+   ========================================================= */
+
+/* Makes width/height calculations easier and predictable */
+* {
+  box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Great+Vibes&display=swap');
+/* =========================================================
+   2. COLOR VARIABLES
+   ========================================================= */
+
+/* Main colors used throughout the invitation */
+:root {
+  --green: #6e1423;   /* Dark maroon */
+  --green2: #8a3a2e;  /* Light maroon/brown */
+  --gold: #d4a94f;    /* Gold */
+  --cream: #fff8ec;   /* Cream background */
+  --rose: #e8a33d;    /* Rose/golden accent */
+}
+
+
+/* =========================================================
+   3. HTML & BODY
+   ========================================================= */
+
+html,
+body {
+  margin: 0;
+}
+
+
+/* Main page background and default text */
+body {
+  min-height: 100vh;
+
+  color: var(--green);
+
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 16px;
+
+  /* Multi-layer luxury wedding background */
+  background:
+    radial-gradient(
+      circle at 50% 8%,
+      #fffefb 0 10%,
+      rgba(255, 254, 251, 0) 36%
+    ),
+
+    radial-gradient(
+      circle at 8% 88%,
+      rgba(199, 155, 72, .28),
+      rgba(199, 155, 72, 0) 34%
+    ),
+
+    radial-gradient(
+      circle at 92% 80%,
+      rgba(216, 138, 152, .2),
+      rgba(216, 138, 152, 0) 32%
+    ),
+
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(65, 110, 90, .12),
+      rgba(65, 110, 90, 0) 30%
+    ),
+
+    linear-gradient(
+      150deg,
+      #f0dcb0,
+      #fffaf2 45%,
+      #ecd2a8
+    );
+
+  /* Prevents horizontal scrolling */
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   4. PAGE CONTAINER
+   ========================================================= */
+
+/* Centers the invitation card on the screen */
+.page {
+  min-height: 100vh;
+
+  display: grid;
+  place-items: center;
+
+  /* Safe-area support for mobile phones */
+  padding:
+    calc(18px + env(safe-area-inset-top, 0px))
+    18px
+    calc(18px + env(safe-area-inset-bottom, 0px));
+}
+
+
+/* =========================================================
+   5. MAIN INVITATION CARD
+   ========================================================= */
+
+/* Main white/cream wedding invitation box */
+.invite-card {
+  width: min(100%, 480px);
+
+  position: relative;
+  overflow: hidden;
+
+  text-align: center;
+
+  padding: 26px 30px 28px;
+
+  /* Card background */
+  background:
+    radial-gradient(
+      circle at 50% 4%,
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0) 30%
+    ),
+
+    linear-gradient(
+      165deg,
+      rgba(255, 253, 246, .99),
+      rgba(247, 238, 215, .97)
+    );
+
+  /* Gold border */
+  border: 1.5px solid rgba(199, 155, 72, .85);
+  border-radius: 6px;
+
+  /* Card shadow */
+  box-shadow:
+    0 4px 0 rgba(199, 155, 72, .35),
+    0 30px 90px rgba(55, 44, 20, .28),
+    inset 0 0 60px rgba(199, 155, 72, .06);
+
+  /* Initially hidden for JavaScript entrance animation */
+  opacity: 0;
+}
+
+
+/* =========================================================
+   6. GOLD FRAME INSIDE CARD
+   ========================================================= */
+
+/* Decorative inner border */
+.gold-frame {
+  position: absolute;
+  inset: 8px;
+
+  border: 1.5px solid rgba(199, 155, 72, .55);
+  border-radius: 3px;
+
+  pointer-events: none;
+  z-index: 6;
+}
+
+
+/* Dashed inner decorative line */
+.gold-frame:after {
+  content: "";
+
+  position: absolute;
+  inset: 6px;
+
+  border: 1px dashed rgba(110, 20, 35, .22);
+}
+
+
+/* =========================================================
+   7. MANDALA WATERMARK
+   ========================================================= */
+
+/* Large faint decorative mandala behind the content */
+.mandala-watermark {
+  position: absolute;
+
+  left: 50%;
+  top: 38%;
+
+  width: 520px;
+  height: 520px;
+
+  transform: translate(-50%, -50%);
+
+  opacity: .05;
+
+  pointer-events: none;
+  z-index: 0;
+}
+/* =========================================================
+   25. RING DECORATION (SHINY GOLD)
+   ========================================================= */
+
+.rings-wrap {
+  height: 70px;
+  margin-top: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ring image */
+.ring {
+  position: absolute;
+  width: 46px;
+  top: 4px;
+
+  /* gold glow + soft 3D depth */
+  filter:
+    brightness(1.15)
+    contrast(1.1)
+    drop-shadow(1px 1px 0 #9a6a16)
+    drop-shadow(2px 3px 2px rgba(80, 45, 5, .35))
+    drop-shadow(0 0 8px rgba(255, 214, 110, .8));
+
+  animation: ringShine 2.6s ease-in-out infinite;
+}
+
+/* Left ring (keeps your original position) */
+.ring.a {
+  transform: translateX(-60px) rotate(-30deg);
+  opacity: 0;
+}
+
+/* Right ring (keeps your original position) */
+.ring.b {
+  transform: translateX(60px) rotate(30deg);
+  opacity: 0;
+  animation-delay: 1.3s;
+}
+
+/* Light pulse on the gold */
+@keyframes ringShine {
+  0%, 100% {
+    filter:
+      brightness(1.05) contrast(1.05)
+      drop-shadow(1px 1px 0 #9a6a16)
+      drop-shadow(2px 3px 2px rgba(80, 45, 5, .35))
+      drop-shadow(0 0 5px rgba(255, 214, 110, .5));
+  }
+  50% {
+    filter:
+      brightness(1.4) contrast(1.15)
+      drop-shadow(1px 1px 0 #9a6a16)
+      drop-shadow(2px 3px 2px rgba(80, 45, 5, .35))
+      drop-shadow(0 0 16px rgba(255, 230, 150, 1));
+  }
+}
+
+/* Diamond sparkle stars on the rings */
+.rings-wrap::before,
+.rings-wrap::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 3;
+  background:
+    linear-gradient(90deg, transparent 44%, #fff 50%, transparent 56%),
+    linear-gradient(0deg,  transparent 44%, #fff 50%, transparent 56%),
+    radial-gradient(circle, #fff 0 2px, rgba(255, 230, 150, .8) 4px, transparent 9px);
+  filter: drop-shadow(0 0 6px #ffe7a0);
+  animation: ringTwinkle 2.4s ease-in-out infinite;
+}
+
+.rings-wrap::before {
+  top: -2px;
+  left: calc(50% - 62px);
+}
+
+.rings-wrap::after {
+  top: 6px;
+  left: calc(50% + 40px);
+  width: 20px;
+  height: 20px;
+  animation-delay: 1.2s;
+}
+
+@keyframes ringTwinkle {
+  0%, 100% { opacity: .1; transform: scale(.4) rotate(0deg); }
+  50%      { opacity: 1;  transform: scale(1)  rotate(20deg); }
+}
+/* Ganesha image (shiny gold) */
+.ganesha {
+  width: 320px;
+  height: auto;
+  max-height: 260px;
+
+  position: relative;
+  z-index: 2;
+
+  /* Initial animation state (your JavaScript fades this in) */
+  opacity: 0;
+  transform: scale(.6);
+
+  filter:
+    brightness(1.1)
+    contrast(1.08)
+    saturate(1.15)
+    drop-shadow(1px 2px 1px rgba(110, 70, 10, .45))
+    drop-shadow(0 0 12px rgba(255, 214, 110, .75));
+
+  animation: ganeshaShine 3s ease-in-out infinite;
+}
+
+@keyframes ganeshaShine {
+  0%, 100% {
+    filter:
+      brightness(1.05) contrast(1.05) saturate(1.1)
+      drop-shadow(1px 2px 1px rgba(110, 70, 10, .45))
+      drop-shadow(0 0 8px rgba(255, 214, 110, .55));
+  }
+  50% {
+    filter:
+      brightness(1.3) contrast(1.12) saturate(1.25)
+      drop-shadow(1px 2px 1px rgba(110, 70, 10, .45))
+      drop-shadow(0 0 22px rgba(255, 232, 150, 1));
+  }
+}
+
+
+/* Golden halo behind Ganesha (pulses) */
+.halo {
+  position: absolute;
+  width: 270px;
+  height: 270px;
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 224, 140, .65),
+      rgba(240, 200, 100, .22) 48%,
+      rgba(226, 196, 119, 0) 72%
+    );
+
+  opacity: 0;
+  animation: haloPulse 3s ease-in-out infinite;
+}
+
+@keyframes haloPulse {
+  0%, 100% { transform: scale(.95); }
+  50%      { transform: scale(1.08); }
+}
+
+
+/* Soft light around Ganesha */
+.ai-light {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  z-index: 1;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 230, 160, .45) 0%,
+      rgba(255, 224, 150, .18) 38%,
+      rgba(255, 224, 150, 0) 68%
+    );
+}
+
+
+/* Diamond sparkle stars around Ganesha */
+.ganesha-stage::before,
+.ganesha-stage::after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  z-index: 3;
+
+  background:
+    linear-gradient(90deg, transparent 44%, #fff 50%, transparent 56%),
+    linear-gradient(0deg,  transparent 44%, #fff 50%, transparent 56%),
+    radial-gradient(circle, #fff 0 2px, rgba(255, 230, 150, .8) 4px, transparent 9px);
+
+  filter: drop-shadow(0 0 6px #ffe7a0);
+  animation: ganeshaTwinkle 2.6s ease-in-out infinite;
+}
+
+.ganesha-stage::before {
+  top: 14%;
+  left: 20%;
+}
+
+.ganesha-stage::after {
+  top: 26%;
+  right: 18%;
+  width: 22px;
+  height: 22px;
+  animation-delay: 1.3s;
+}
+
+@keyframes ganeshaTwinkle {
+  0%, 100% { opacity: .1; transform: scale(.4) rotate(0deg); }
+  50%      { opacity: 1;  transform: scale(1)  rotate(20deg); }
+}
+.diva {
+  position: absolute;
+  width: 34px;
+  z-index: 4;
+  filter:
+    brightness(1.2)
+    drop-shadow(0 0 10px rgba(255, 187, 62, .9))
+    drop-shadow(0 0 18px rgba(255, 214, 110, .6));
+}
+
+/* =========================================================
+   8. CORNER DECORATIONS
+   ========================================================= */
+
+/* Size and position of decorative corner designs */
+.corner {
+  position: absolute;
+
+  width: 54px;
+  height: 54px;
+
+  opacity: .85;
+
+  z-index: 6;
+  pointer-events: none;
+}
+
+
+/* Makes SVG fit the corner */
+.corner svg {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Top-left corner */
+.corner.tl {
+  top: 10px;
+  left: 10px;
+}
+
+
+/* Top-right corner */
+.corner.tr {
+  top: 10px;
+  right: 10px;
+  transform: scaleX(-1);
+}
+
+
+/* Bottom-left corner */
+.corner.bl {
+  bottom: 10px;
+  left: 10px;
+  transform: scaleY(-1);
+}
+
+
+/* Bottom-right corner */
+.corner.br {
+  bottom: 10px;
+  right: 10px;
+  transform: scale(-1, -1);
+}
+
+
+/* =========================================================
+   9. GANESHA SECTION
+   ========================================================= */
+
+/* Area containing Ganesha image */
+.ganesha-stage {
+  height: 300px;
+
+  position: relative;
+
+  margin-top: 4px;
+
+  display: grid;
+  place-items: center;
+
+  /* Gives 3D depth to animations */
+  perspective: 900px;
+}
+
+
+/* Ganesha image */
+.ganesha {
+  width: 320px;
+  height: auto;
+  max-height: 260px;
+
+  filter: drop-shadow(
+    0 8px 10px rgba(120, 80, 20, .14)
+  );
+
+  position: relative;
+  z-index: 2;
+
+  /* Initial animation state */
+  opacity: 0;
+  transform: scale(.6);
+}
+
+
+/* Golden halo behind Ganesha */
+.halo {
+  position: absolute;
+
+  width: 250px;
+  height: 250px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(226, 196, 119, .5),
+      rgba(226, 196, 119, .14) 48%,
+      rgba(226, 196, 119, 0) 70%
+    );
+
+  opacity: 0;
+}
+
+
+/* Soft light around Ganesha */
+.ai-light {
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 224, 150, .32) 0%,
+      rgba(255, 224, 150, .14) 35%,
+      rgba(255, 224, 150, 0) 68%
+    );
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   10. DIYA / LAMP DECORATION
+   ========================================================= */
+
+.diva {
+  position: absolute;
+
+  width: 34px;
+
+  z-index: 4;
+
+  filter: drop-shadow(
+    0 0 8px rgba(255, 187, 62, .65)
+  );
+}
+
+
+/* Left diya */
+.diva-left {
+  left: 6%;
+  top: 34%;
+}
+
+
+/* Right diya */
+.diva-right {
+  right: 6%;
+  top: 34%;
+}
+
+
+/* =========================================================
+   11. SPARKLES
+   ========================================================= */
+
+/* Small decorative stars */
+.spark {
+  position: absolute;
+
+  color: #c79b48;
+  font-size: 20px;
+
+  z-index: 3;
+
+  opacity: 0;
+}
+
+
+/* Individual sparkle positions */
+.spark1 {
+  top: 38px;
+  left: 22%;
+}
+
+.spark2 {
+  top: 72px;
+  right: 20%;
+}
+
+.spark3 {
+  bottom: 32px;
+  left: 27%;
+}
+
+.spark4 {
+  bottom: 48px;
+  right: 27%;
+}
+
+.spark5 {
+  top: 22%;
+  left: 35%;
+}
+
+.spark6 {
+  top: 20%;
+  right: 34%;
+}
+
+
+/* =========================================================
+   12. TEXT ABOVE NAMES
+   ========================================================= */
+
+/* Blessing text */
+.blessing {
+  font-size: 13px;
+  letter-spacing: 2px;
+
+  color: var(--gold);
+
+  margin: 0 0 10px;
+
+  opacity: 0;
+}
+
+
+/* Small invitation heading */
+.eyebrow {
+  font: 11px Arial, sans-serif;
+
+  letter-spacing: 3px;
+
+  margin: 0;
+
+  color: var(--green2);
+
+  opacity: 0;
+}
+
+
+/* =========================================================
+   13. GUEST NAME
+   ========================================================= */
+/* ✦❦ Premium Floral Personalized Guest Name ❦✦ */
+
+.guest {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  margin: 18px 0 10px;
+  padding: 7px 30px;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.8px;
+  line-height: 1.4;
+
+  /* Warm elegant rose-gold */
+  color: #a65f52;
+
+  /* Very subtle depth */
+  text-shadow: 0 1px 1px rgba(80, 40, 30, 0.12);
+
+  opacity: 0;
+
+  transform: translateY(5px) scale(0.98);
+
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+/* ───── Floral ornaments ───── */
+
+.guest::before,
+.guest::after {
+  position: absolute;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-style: normal;
+
+  color: #d4af72;
+
+  opacity: 0.9;
+
+  text-shadow: 0 1px 1px rgba(90, 60, 30, 0.1);
+}
+
+.guest::before {
+  content: "❦";
+  left: 2px;
+}
+
+.guest::after {
+  content: "❦";
+  right: 2px;
+}
+
+/* ───── Personalized guest name ───── */
+
+.guest span {
+  position: relative;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 700;
+  font-style: italic;
+
+  color: var(--green);
+
+  letter-spacing: 0.6px;
+
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+/* ───── Tiny floral sparkle ───── */
+
+.guest span::before {
+  content: "✦";
+  margin-right: 6px;
+
+  font-size: 8px;
+  color: #d4af72;
+
+  vertical-align: middle;
+}
+
+.guest span::after {
+  content: "✦";
+  margin-left: 6px;
+
+  font-size: 8px;
+  color: #d4af72;
+
+  vertical-align: middle;
+}
+
+
+
+/* =========================================================
+   14. MAIN TITLE
+   ========================================================= */ 
+/* ✦ YOU ARE CORDIALLY INVITED TO THE ✦ */
+
+h1 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+
+  font-size: clamp(22px, 6vw, 32px);
+  line-height: 1.15;
+
+  font-weight: 600;
+  font-style: italic;
+
+  margin: 12px 0 7px;
+  padding: 0 10px;
+
+  letter-spacing: 1.2px;
+  text-align: center;
+
+  color: #8A3A2E;
+
+  /* Soft premium depth */
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.45),
+    0 1px 2px rgba(80, 35, 20, 0.12);
+}
+
+/* Individual animated characters */
+h1 .ch {
+  display: inline-block;
+
+  opacity: 0;
+  transform: translateY(12px);
+
+  will-change: transform, opacity;
+}
+
+/* Subtle gold accent */
+h1::after {
+  content: "✦";
+  display: block;
+
+  margin: 6px auto 0;
+
+  font-family: Georgia, serif;
+  font-size: 9px;
+  font-style: normal;
+
+  color: #D4AF72;
+  opacity: 0.8;
+}
+/* =========================================================
+   15. TITLE FLOURISH
+   ========================================================= */
+
+.title-flourish {
+  font-family: 'Great Vibes', cursive;
+
+  font-size: 15px;
+
+  color: var(--gold);
+
+  display: block;
+
+  letter-spacing: 1px;
+
+  margin-top: -4px;
+
+  opacity: 0;
+}
+
+
+/* Subtitle below title */
+.subtitle {
+  font-size: 13px;
+
+  color: #7a776e;
+
+  font-style: italic;
+
+  margin: 0;
+
+  opacity: 0;
+}
+
+
+/* =========================================================
+   16. RAHUL & MANISHA NAMES
+   ========================================================= */
+
+/*
+   MAIN COUPLE NAMES
+
+   This section controls:
+   - Rahul
+   - Manisha
+   - Gold color
+   - Large font
+   - Static appearance
+   - No name animation
+*/
+
+.names {
+  margin: 19px 0 7px;
+
+  /* LARGE RESPONSIVE NAME */
+ 
+  line-height: .95;
+
+  color: #d4af37 !important;
+
+  font-family:
+    'Great Vibes',
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-style: normal;
+
+  font-weight: 600 !important;
+
+  letter-spacing: 1px;
+
+  /* Golden premium glow */
+  text-shadow:
+    0 1px 0 #fff8df,
+    0 0 7px rgba(212, 169, 79, .55),
+    0 0 18px rgba(212, 169, 79, .32);
+
+  filter:
+    drop-shadow(
+      0 4px 7px rgba(110, 20, 35, .16)
+    );
+
+  /* Names stay visible */
+  opacity: 1 !important;
+
+  /* Disable movement animation */
+  transform: none !important;
+
+  animation: none !important;
+  transition: none !important;
+}
+
+
+/* Rahul */
+.names .line1 {
+  display: inline-block;
+
+   color: #f4be0e !important;
+
+  font-weight: 700 !important;
+
+  opacity: 1 !important;
+
+  transform: none !important;
+
+  animation: none !important;
+
+  transition: none !important;
+}
+
+
+/* Manisha */
+.names .line2 {
+  display: inline-block;
+
+  color: #f4be0e !important;
+
+  font-weight: 700 !important;
+
+  opacity: 1 !important;
+
+  transform: none !important;
+
+  animation: none !important;
+
+  transition: none !important;
+}
+
+
+/* Individual letters, if JavaScript creates .ch */
+.names .line1,
+.names .line2,
+.names .ch {
+  display: inline-block;
+  position: relative;
+
+  font-family: 'Kaushan Script', 'Great Vibes', cursive !important;
+  font-weight: 400 !important;
+  font-size: 55px !important;
+  letter-spacing: 1px;
+  text-transform: none;
+
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+
+  color: #d4af37 !important; /* fallback */
+
+  /* glitter dots on top, metallic gold underneath */
+  background:
+    radial-gradient(circle, rgba(255,255,255,.95) 0 0.8px, transparent 1.4px) 0 0 / 7px 7px,
+    radial-gradient(circle, rgba(255,240,180,.9) 0 0.7px, transparent 1.3px) 3px 4px / 9px 9px,
+    linear-gradient(
+      180deg,
+      #fff7d1 0%,
+      #f8de84 18%,
+      #e2b64c 40%,
+      #b8842a 62%,
+      #f1cf70 82%,
+      #fff0b3 100%
+    );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none !important;
+}
+
+/* 3D gold edge + glow (on the name, not each letter) */
+.names .line1,
+.names .line2 {
+  filter:
+    drop-shadow(1px 1px 0 #9a6a16)
+    drop-shadow(2px 2px 0 #855810)
+    drop-shadow(3px 3px 0 #6f480b)
+    drop-shadow(4px 5px 3px rgba(80, 45, 5, .35))
+    drop-shadow(0 0 10px rgba(255, 214, 110, .65));
+}
+
+.names .ch {
+  filter: none !important;
+}
+.names .line1::before,
+.names .line1::after,
+.names .line2::before,
+.names .line2::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+  -webkit-text-fill-color: initial;
+
+  /* 4-point star */
+  background:
+    linear-gradient(90deg, transparent 44%, #fff 50%, transparent 56%),
+    linear-gradient(0deg,  transparent 44%, #fff 50%, transparent 56%),
+    radial-gradient(circle, #fff 0 2px, rgba(255, 230, 150, .8) 4px, transparent 9px);
+  filter: drop-shadow(0 0 6px #ffe7a0);
+  animation: twinkle 2.4s ease-in-out infinite !important;
+}
+
+.names .line1::before { top: -8px;  left: 6%; }
+.names .line1::after  { top: 30%;   right: 4%; animation-delay: 1.1s !important; width: 20px; height: 20px; }
+.names .line2::before { top: -8px;  left: 12%; animation-delay: .6s !important; }
+.names .line2::after  { bottom: 8%; right: 10%; animation-delay: 1.6s !important; width: 20px; height: 20px; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: .15; transform: scale(.5) rotate(0deg); }
+  50%      { opacity: 1;   transform: scale(1)  rotate(20deg); }
+}
+.names > span:not(.line1):not(.line2) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 6px 0;
+  font-family: 'Great Vibes', cursive;
+  font-size: 40px;
+  font-weight: 400;
+  color: #c9973a;
+  -webkit-text-fill-color: #c9973a;
+  background: none;
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  text-shadow: 0 1px 0 #fff3c4, 0 0 10px rgba(246, 180, 36, .55);
+}
+
+.names > span:not(.line1):not(.line2):before,
+.names > span:not(.line1):not(.line2):after {
+  content: "";
+  width: 60px;
+  height: 1px;
+}
+.names > span:not(.line1):not(.line2):before { background: linear-gradient(90deg, transparent, #c9973a); }
+.names > span:not(.line1):not(.line2):after  { background: linear-gradient(90deg, #c9973a, transparent); }
+/* =========================================================
+   17. "&" BETWEEN RAHUL & MANISHA
+   ========================================================= */
+
+/* Decorative "&" line */
+.names span {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  color: var(--gold);
+
+  font-size: 24px;
+
+  opacity: 1 !important;
+
+  transform: none !important;
+
+  animation: none !important;
+
+  transition: none !important;
+
+  margin: 8px 0;
+
+  text-shadow:
+    0 0 8px rgba(212, 169, 79, .65);
+}
+
+
+/* Line before & */
+.names span:before {
+  content: "";
+
+  width: 34px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--gold)
+    );
+}
+
+
+/* Line after & */
+.names span:after {
+  content: "";
+
+  width: 34px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--gold),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   18. ORNAMENT
+   ========================================================= */
+
+/* Decorative symbol below couple names */
+.ornament {
+  color: var(--gold);
+
+  margin: 10px 0 16px;
+
+  letter-spacing: 4px;
+
+  opacity: 0;
+
+  font-size: 15px;
+}
+
+
+/* =========================================================
+   19. EVENT DETAILS
+   ========================================================= */
+
+/* Container for date, time and venue */
+.details {
+  line-height: 1.6;
+
+  opacity: 0;
+
+  padding: 14px 0 4px;
+
+  border-top:
+    1px solid rgba(199, 155, 72, .3);
+
+  border-bottom:
+    1px solid rgba(199, 155, 72, .3);
+}
+
+
+/* Event date */
+.date {
+  font-size: 20px;
+
+  letter-spacing: 2.5px;
+
+  color: #6e1423;
+}
+
+
+/* Event time */
+.time {
+  font-size: 15px;
+
+  color: #8a6a5e;
+
+  margin: 3px 0 13px;
+
+  font-style: italic;
+}
+
+
+/* Venue name */
+.venue {
+  font-size: 20px;
+
+  font-weight: 600;
+
+  letter-spacing: 1.2px;
+
+  color: #6e1423;
+}
+
+
+/* Venue address */
+.address {
+  font-size: 14.5px;
+
+  color: #8a6a5e;
+}
+
+
+/* Host / Family Text */
+.host {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin-top: 10px;
+  padding: 4px 12px;
+
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 1px;
+  line-height: 1.4;
+  text-transform: none;
+
+  color: #f0a40d;
+
+  /* Very subtle shadow */
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+}
+
+.host::before,
+.host::after {
+  content: "✦";
+  font-family: Georgia, serif;
+  font-size: 8px;
+  font-style: normal;
+  color: #D8B56A;
+  opacity: 0.8;
+}
+/* =========================================================
+   20. PERSONALIZATION INPUT
+   ========================================================= */
+
+/* Guest-name input area */
+.personalize {
+  margin: 20px auto 0;
+
+  max-width: 340px;
+
+  text-align: left;
+
+  position: relative;
+
+  z-index: 5;
+
+  opacity: 0;
+}
+
+
+/* Input label */
+.personalize label {
+  font: 10px Arial;
+
+  letter-spacing: 1.4px;
+
+  text-transform: uppercase;
+
+  color: #a4867a;
+
+  margin-bottom: 7px;
+
+  display: block;
+}
+
+
+/* Input + button row */
+.input-row {
+  display: flex;
+
+  gap: 8px;
+}
+
+
+/* Guest name input */
+input {
+  flex: 1;
+
+  min-width: 0;
+
+  border:
+    1px solid rgba(199, 155, 72, .5);
+
+  border-radius: 10px;
+
+  padding: 12px 13px;
+
+  background: #fffdf8;
+
+  font:
+    15px/1.2
+    'Cormorant Garamond',
+    Arial;
+
+  color: var(--green);
+
+  outline: none;
+
+  transition: .2s;
+}
+
+
+/* Input focus effect */
+input:focus {
+  border-color: var(--gold);
+
+  box-shadow:
+    0 0 0 3px rgba(199, 155, 72, .15);
+}
+
+
+/* =========================================================
+   21. NORMAL BUTTON
+   ========================================================= */
+
+button {
+  border: 1px solid var(--gold);
+
+  background:
+    linear-gradient(
+      135deg,
+      #e3bd6d,
+      #b3852f
+    );
+
+  color: #fff;
+
+  border-radius: 10px;
+
+  padding: 0 16px;
+
+  font:
+    bold 11px Arial;
+
+  letter-spacing: .5px;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+
+/* Button hover */
+button:hover {
+  filter: brightness(1.08);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   22. LOCATION BUTTON
+   ========================================================= */
+
+/* Google Maps / location button */
+.location {
+  display: inline-block;
+
+  margin-top: 16px;
+
+  position: relative;
+
+  z-index: 5;
+
+  padding: 13px 28px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7a1f2b,
+      #4a0f18
+    );
+
+  color: #fff;
+
+  text-decoration: none;
+
+  font:
+    bold 11.5px Arial;
+
+  letter-spacing: 1.6px;
+
+  border: 1.5px solid #d4a94f;
+
+  box-shadow:
+    0 10px 26px rgba(110, 20, 35, .32),
+    inset 0 0 14px rgba(255, 255, 255, .06);
+
+  transition: .25s;
+
+  opacity: 0;
+}
+
+
+/* Location hover effect */
+.location:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 30px rgba(110, 20, 35, .38);
+}
+
+
+/* =========================================================
+   23. WHATSAPP / SHARE BUTTON
+   ========================================================= */
+
+/* Share button container */
+.share-row {
+  margin-top: 12px;
+
+  position: relative;
+
+  z-index: 5;
+}
+
+
+/* Green share button */
+.share-btn {
+  opacity: 1 !important;
+
+  display: inline-block;
+
+  white-space: nowrap;
+
+  padding: 12px 26px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2fae62,
+      #1d7d43
+    );
+
+  color: #fff;
+
+  font:
+    bold 11.5px Arial;
+
+  letter-spacing: 1.4px;
+
+  border: 1.5px solid #bfe6cc;
+
+  box-shadow:
+    0 10px 24px rgba(29, 125, 67, .3);
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+
+/* Share button hover */
+.share-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 28px rgba(29, 125, 67, .36);
+}
+
+
+/* =========================================================
+   24. SHARE SUCCESS MESSAGE
+   ========================================================= */
+
+/* Small popup after sharing */
+.share-toast {
+  position: fixed;
+
+  left: 50%;
+  bottom: 28px;
+
+  transform:
+    translateX(-50%)
+    translateY(10px);
+
+  background: #2d2417;
+
+  color: #fff;
+
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  font: 12px Arial;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: .3s;
+
+  z-index: 50;
+}
+
+
+/* Visible toast */
+.share-toast.show {
+  opacity: 1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+
+/* =========================================================
+   25. RING DECORATION
+   ========================================================= */
+
+.rings-wrap {
+  height: 60px;
+
+  margin-top: 12px;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Ring image */
+.ring {
+  position: absolute;
+
+  width: 38px;
+
+  top: 0;
+}
+
+
+/* Left ring */
+.ring.a {
+  transform:
+    translateX(-60px)
+    rotate(-30deg);
+
+  opacity: 0;
+}
+
+
+/* Right ring */
+.ring.b {
+  transform:
+    translateX(60px)
+    rotate(30deg);
+
+  opacity: 0;
+}
+
+
+/* =========================================================
+   26. FOOTER
+   ========================================================= */
+
+.footer {
+  margin: 8px 0 0;
+
+  color: #777;
+
+  font: italic 12px Georgia;
+
+  opacity: 0;
+}
+
+
+/* =========================================================
+   27. GOLD DUST EFFECT
+   ========================================================= */
+
+/* Full-screen decorative gold particles */
+.gold-dust {
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+
+  opacity: .35;
+}
+
+
+/* Individual gold particle */
+.gold-dust i {
+  position: absolute;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #f4d998,
+      rgba(244, 217, 152, 0)
+    );
+}
+
+
+/* =========================================================
+   28. FALLING PETALS
+   ========================================================= */
+
+/* Full-screen falling petals layer */
+.petals {
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 3;
+}
+
+
+/* Individual petal */
+.petal {
+  position: absolute;
+
+  top: -30px;
+
+  opacity: 0;
+}
+
+
+/* Petal SVG size */
+.petal svg {
+  width: 16px;
+  height: 16px;
+
+  filter:
+    drop-shadow(
+      0 2px 2px rgba(150, 90, 90, .2)
+    );
+}
+
+
+/* =========================================================
+   29. ITALIC TEXT INSIDE NAMES
+   ========================================================= */
+
+.names em {
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-style: italic;
+}
+
+
+/* =========================================================
+   30. SPARKLE BURST
+   ========================================================= */
+
+/* Small sparkle effect used by JavaScript */
+.sparkle-burst {
+  position: absolute;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #fff2c8;
+
+  box-shadow:
+    0 0 8px 2px rgba(255, 220, 140, .9);
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   31. SHARED INVITATION MODE
+   ========================================================= */
+
+/*
+   When a personalized invitation link is opened,
+   hide the name-editing controls.
+
+   Example:
+   body.shared-invite
+*/
+body.shared-invite .personalize {
+  display: none !important;
+}
+
+
+/* =========================================================
+   32. MOBILE RESPONSIVE DESIGN
+   ========================================================= */
+
+/*
+   These settings apply to phones with screen width
+   of 440px or smaller.
+*/
+@media (max-width: 440px) {
+
+  /* Smaller card padding */
+  .invite-card {
+    padding: 18px 20px;
+  }
+
+  /* Smaller Ganesha section */
+  .ganesha-stage {
+    height: 245px;
+  }
+
+  /* Smaller Ganesha */
+  .ganesha {
+    width: 300px;
+    height: 250px;
+  }
+
+  /* Smaller main title */
+  h1 {
+    font-size: 40px;
+  }
+
+  /*
+     Rahul & Manisha on mobile.
+
+     20vw makes the names responsive,
+     while 130px prevents them from becoming
+     excessively large.
+  */
+  .names {
+    font-size: clamp(70px, 20vw, 130px) !important;
+
+    line-height: .95 !important;
+
+    letter-spacing: 0;
+  }
+
+
+  /* Keep Rahul static */
+  .names .line1 {
+    opacity: 1 !important;
+
+    transform: none !important;
+
+    animation: none !important;
+  }
+
+
+  /* Keep Manisha static */
+  .names .line2 {
+    opacity: 1 !important;
+
+    transform: none !important;
+
+    animation: none !important;
+  }
+
+
+  /* Stack input and button vertically */
+  .input-row {
+    flex-direction: column;
+  }
+
+
+  /* Mobile button height */
+  .input-row button {
+    height: 40px;
+  }
+}

@@ -565,6 +565,15 @@ m-40 -200 c7 -7 12 -22 12 -35 0 -12 7 -26 17 -31 10 -6 14 -16 10 -26 -5 -13
 (function(){
   const opener=document.getElementById('boxOpening');
   if(!opener) return;
+
+  // Show the 3D opening box ONLY on a personalized guest link.
+  // Normal owner/base URL opens the invitation directly.
+  const guest = new URLSearchParams(window.location.search).get('guest');
+  if(!guest || !guest.trim()) {
+    opener.remove();
+    return;
+  }
+
   let opened=false;
   function openInvitation(){
     if(opened) return;
