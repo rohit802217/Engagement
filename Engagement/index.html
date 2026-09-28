@@ -8,7 +8,17 @@
   <meta property="og:title" content="Rahul & Manisha — Engagement Ceremony 💍">
   <meta property="og:description" content="You are cordially invited to Rahul & Manisha's Engagement Ceremony · 27 November 2026 · Govind Palace, Dehri">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:url" content="https://rohit802217.github.io/Engagement/Engagement/">
+  <meta property="og:image" content="https://rohit802217.github.io/Engagement/Engagement/share-preview.jpg">
+  <meta property="og:image:secure_url" content="https://rohit802217.github.io/Engagement/Engagement/share-preview.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Traditional engagement invitation card">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rahul & Manisha — Engagement Ceremony 💍">
+  <meta name="twitter:description" content="You are cordially invited to Rahul & Manisha's Engagement Ceremony">
+  <meta name="twitter:image" content="https://rohit802217.github.io/Engagement/Engagement/share-preview.jpg">
   <title>Rahul & Manisha | Engagement Ceremony</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -632,7 +642,36 @@ function getShareMessage(name, shareUrl) {
 
 function showGuest(name) {
   if (input) input.value = name;
-  if (preview) preview.textContent = name;
+  if (!preview) return;
+
+  // Keep short names on one line, but split longer names neatly on mobile.
+  preview.textContent = '';
+  const words = name.trim().split(/\s+/).filter(Boolean);
+  const cleanName = words.join(' ');
+
+  if (cleanName.length <= 15 || words.length < 2) {
+    preview.textContent = cleanName || 'Guest';
+    return;
+  }
+
+  // Find the most balanced place to split the name.
+  let bestIndex = 1;
+  let bestDifference = Infinity;
+  for (let i = 1; i < words.length; i++) {
+    const left = words.slice(0, i).join(' ');
+    const right = words.slice(i).join(' ');
+    const difference = Math.abs(left.length - right.length);
+    if (difference < bestDifference) {
+      bestDifference = difference;
+      bestIndex = i;
+    }
+  }
+
+  const firstLine = words.slice(0, bestIndex).join(' ');
+  const secondLine = words.slice(bestIndex).join(' ');
+  preview.append(document.createTextNode(firstLine));
+  preview.append(document.createElement('br'));
+  preview.append(document.createTextNode(secondLine));
 }
 
 applyName?.addEventListener('click', () => {

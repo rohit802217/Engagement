@@ -768,6 +768,24 @@ body {
   vertical-align: middle;
 }
 
+/* Long guest names are split by JavaScript at a natural word boundary. */
+.guest {
+  max-width: calc(100% - 30px);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.guest span {
+  display: inline-block;
+  max-width: 260px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.guest span br {
+  display: block;
+}
+
 
 
 /* =========================================================
