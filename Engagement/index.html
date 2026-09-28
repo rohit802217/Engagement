@@ -8,6 +8,7 @@
   <meta property="og:title" content="Rahul & Manisha — Engagement Ceremony 💍">
   <meta property="og:description" content="You are cordially invited to Rahul & Manisha's Engagement Ceremony · 27 November 2026 · Govind Palace, Dehri">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rahul & Manisha | Engagement Invitation">
   <meta property="og:url" content="https://rohit802217.github.io/Engagement/Engagement/">
   <meta property="og:image" content="https://rohit802217.github.io/Engagement/Engagement/share-preview.jpg">
   <meta property="og:image:secure_url" content="https://rohit802217.github.io/Engagement/Engagement/share-preview.jpg">
@@ -742,53 +743,43 @@ shareBtn?.addEventListener('click', async (event) => {
 
   const name = getGuestName();
   const shareUrl = buildShareUrl(name);
-  const message = getShareMessage(name, shareUrl);
+  const message = shareUrl
+    ? `💌 You are invited to Rahul & Manisha's Engagement Ceremony!\nDear ${name}, please open the invitation card below.\n\n${shareUrl}`
+    : `💌 You are invited to Rahul & Manisha's Engagement Ceremony!\nDear ${name}, please open the invitation card.`;
 
-  // Native Share. Do not pass a file:// URL to navigator.share().
+  // On phones, open WhatsApp with the real invitation URL pre-filled.
+  // WhatsApp can then create a clickable link-preview card from the OG image
+  // in index.html. Tapping that preview opens the complete invitation.
+  if (shareUrl) {
+    const whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(message);
+    try {
+      window.location.href = whatsappUrl;
+      return;
+    } catch (e) {}
+  }
+
+  // Fallback for browsers/devices where WhatsApp cannot be opened.
   if (typeof navigator.share === 'function') {
     try {
-      const shareData = {
+      await navigator.share({
         title: 'Rahul & Manisha — Engagement Ceremony',
-        text: shareUrl ? `💍 Rahul & Manisha's Engagement Ceremony\nDear ${name}` : message
-      };
-      if (shareUrl) shareData.url = shareUrl;
-
-      if (typeof navigator.canShare === 'function' && !navigator.canShare(shareData)) {
-        delete shareData.url;
-      }
-
-      await navigator.share(shareData);
+        text: message,
+        ...(shareUrl ? { url: shareUrl } : {})
+      });
       return;
     } catch (err) {
       if (err && err.name === 'AbortError') return;
-      // Continue to WhatsApp/copy fallback for other browser share errors.
     }
   }
 
-  // WhatsApp fallback.
-  const whatsappUrl = 'https://wa.me/?text=' + encodeURIComponent(message);
-  let opened = false;
-  try {
-    const popup = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-    opened = !!popup;
-  } catch (e) {}
-
-  if (opened) return;
-
-  const copied = await copyText(message);
+  const copied = await copyText(shareUrl || message);
   if (copied) {
-    showShareMessage(
-      shareUrl
-        ? 'Invitation link copied. Paste it in WhatsApp.'
-        : 'Invitation message copied. Paste it in WhatsApp.'
-    );
+    showShareMessage('Invitation link copied. Paste it in WhatsApp.');
   } else {
-    showShareMessage('WhatsApp could not be opened. Please copy and share the invitation.');
+    showShareMessage('Please copy the invitation link and share it in WhatsApp.');
   }
 });
 
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="js/app.js"></script>
 </body>
 </html>
