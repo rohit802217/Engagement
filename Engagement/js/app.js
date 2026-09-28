@@ -106,7 +106,7 @@ document.getElementById('ganeshaArt')?.addEventListener('click',()=>{
 
 // safety net: guarantee everything is visible no matter what
 setTimeout(()=>{
-  document.querySelectorAll('.invite-card,.blessing,.eyebrow,.guest,#titleText .ch,#flourish,.subtitle,#namesText .ch,#namesText span,.ornament,.details,.personalize,.location,.share-btn,.footer,.ganesha,.halo,.ai-light,.spark,.diva,.ring')
+  document.querySelectorAll('.invite-card,.blessing,.eyebrow,.guest,#titleText .ch,#flourish,.subtitle,#namesText .ch,#namesText span,.ornament,.details,.personalize,.location,.footer,.ganesha,.halo,.ai-light,.spark,.diva,.ring')
     .forEach(el=>{ el.style.opacity='1'; el.style.transform='none'; });
 },2500);
 

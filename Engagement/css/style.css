@@ -1787,3 +1787,224 @@ body.shared-invite .personalize {
     height: 40px;
   }
 }
+
+/* =========================================================
+   FINAL LUXURY PURPLE + GOLD STYLE
+   Matched to the 3D invitation-box reference artwork.
+   ========================================================= */
+:root{
+  --green:#5a102f;
+  --green2:#7b294d;
+  --gold:#e7bd62;
+  --cream:#fff3df;
+  --rose:#d59a43;
+  --velvet:#4a092c;
+  --velvet2:#70133e;
+  --ivory:#fff4dc;
+}
+
+html,body{background:#2a061b!important;}
+body{
+  color:var(--ivory)!important;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,190,115,.18), transparent 24%),
+    radial-gradient(circle at 88% 12%, rgba(255,218,157,.16), transparent 25%),
+    radial-gradient(circle at 50% 85%, rgba(118,18,64,.42), transparent 38%),
+    linear-gradient(145deg,#210517 0%,#4a092c 45%,#210517 100%)!important;
+}
+
+.page{padding:20px 14px 28px!important;}
+
+.invite-card{
+  width:min(100%,500px)!important;
+  padding:28px 28px 32px!important;
+  background:
+    radial-gradient(circle at 50% 8%,rgba(255,235,188,.10),transparent 28%),
+    linear-gradient(160deg,#65123d 0%,#4a092c 52%,#30051e 100%)!important;
+  border:1.5px solid rgba(239,199,105,.95)!important;
+  border-radius:8px!important;
+  box-shadow:
+    0 0 0 5px rgba(65,7,38,.55),
+    0 0 0 7px rgba(226,179,82,.38),
+    0 28px 70px rgba(0,0,0,.58),
+    inset 0 0 70px rgba(255,220,140,.055)!important;
+}
+
+.invite-card::before{
+  content:"";
+  position:absolute;
+  inset:16px;
+  border:1px solid rgba(236,193,92,.52);
+  pointer-events:none;
+  z-index:5;
+}
+
+.gold-frame{inset:9px!important;border-color:rgba(244,205,112,.88)!important;}
+.gold-frame:after{border-color:rgba(244,205,112,.28)!important;}
+
+.corner svg path{stroke:#e7bd62!important;}
+.corner svg circle{fill:#e7bd62!important;}
+
+.mandala-watermark{opacity:.075!important;}
+.mandala-watermark g{stroke:#e7bd62!important;}
+
+.ganesha-stage{margin-top:8px!important;}
+.ganesha{filter:
+  brightness(1.12) contrast(1.06) saturate(1.08)
+  drop-shadow(0 3px 2px rgba(20,2,10,.55))
+  drop-shadow(0 0 15px rgba(255,213,112,.72))!important;}
+
+.halo{background:radial-gradient(circle,rgba(255,215,124,.38),rgba(223,169,70,.13) 48%,transparent 72%)!important;}
+.ai-light{background:radial-gradient(circle,rgba(255,224,150,.30),rgba(255,210,115,.08) 40%,transparent 70%)!important;}
+
+.blessing,.eyebrow,.subtitle{color:#f5ddb0!important;}
+.blessing{letter-spacing:2.4px!important;}
+.eyebrow{color:#d9ae60!important;}
+.subtitle{color:#ead6b8!important;}
+
+.guest{
+  color:#f4d995!important;
+  background:linear-gradient(135deg,rgba(255,224,148,.08),rgba(255,224,148,.015))!important;
+  border-top:1px solid rgba(231,189,98,.34);
+  border-bottom:1px solid rgba(231,189,98,.34);
+}
+.guest::before,.guest::after,.guest span::before,.guest span::after{color:#e7bd62!important;}
+.guest span{color:#fff1c9!important;text-shadow:0 1px 2px rgba(0,0,0,.4)!important;}
+
+h1{color:#f4d58d!important;text-shadow:0 2px 3px rgba(20,2,10,.55),0 0 12px rgba(230,185,85,.16)!important;}
+h1::after{color:#e7bd62!important;}
+.title-flourish{color:#e7bd62!important;}
+
+.names,.names .line1,.names .line2,.names .ch{
+  color:#f1c85f!important;
+  -webkit-text-fill-color:transparent!important;
+  background:
+    radial-gradient(circle,rgba(255,255,255,.95) 0 .8px,transparent 1.4px) 0 0/7px 7px,
+    linear-gradient(180deg,#fff3bf 0%,#f8da7b 22%,#dba63d 50%,#a66d20 68%,#f2ca67 86%,#fff0b3 100%);
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,.45))!important;
+}
+
+.ornament{color:#e7bd62!important;}
+.details{
+  border-top-color:rgba(231,189,98,.42)!important;
+  border-bottom-color:rgba(231,189,98,.42)!important;
+}
+.date,.venue{color:#f0c966!important;text-shadow:0 1px 2px rgba(0,0,0,.35);}
+.time,.address{color:#f0dec0!important;}
+.host{color:#f4d17b!important;}
+.host::before,.host::after{color:#e7bd62!important;}
+
+.personalize label{color:#d8b06a!important;}
+input{background:rgba(255,247,228,.96)!important;color:#5a102f!important;border-color:rgba(231,189,98,.68)!important;}
+button{background:linear-gradient(135deg,#e9c46b,#a96d1f)!important;color:#3b0823!important;border-color:#f0d38b!important;}
+
+.location{
+  background:linear-gradient(135deg,#7b1c4a,#3b0823)!important;
+  color:#fff0c9!important;
+  border-color:#e7bd62!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.35),inset 0 0 16px rgba(255,214,120,.08)!important;
+}
+.share-btn{
+  background:linear-gradient(135deg,#d9a63d,#8f5b19)!important;
+  color:#fff4d5!important;
+  border-color:#f0d18a!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.32),inset 0 0 16px rgba(255,231,166,.12)!important;
+}
+
+.footer{color:#e5c995!important;}
+.ring{filter:brightness(1.15) contrast(1.08) drop-shadow(0 2px 3px rgba(0,0,0,.45)) drop-shadow(0 0 9px rgba(255,214,110,.72))!important;}
+.sparkle-burst{background:#fff0b8!important;box-shadow:0 0 8px 2px rgba(255,220,140,.9)!important;}
+.gold-dust i{background:radial-gradient(circle,#f4d998,rgba(244,217,152,0))!important;}
+
+/* Guest links are the final invitation view: remove the owner-only name editor. */
+body.shared-invite .personalize{display:none!important;}
+
+@media(max-width:480px){
+  .page{padding:12px 9px 22px!important;}
+  .invite-card{padding:22px 18px 28px!important;}
+  .invite-card::before{inset:12px;}
+  .ganesha-stage{height:270px!important;}
+  .ganesha{width:300px!important;max-height:245px!important;}
+  .names .line1,.names .line2,.names .ch{font-size:52px!important;}
+}
+
+
+/* ===== Final luxury velvet invitation styling ===== */
+body{
+  background:
+    radial-gradient(circle at 50% 8%, rgba(154,48,93,.28), transparent 35%),
+    linear-gradient(145deg,#16040e 0%,#3a0828 48%,#16040e 100%);
+  color:#f8e7b0;
+}
+.page{
+  position:relative;
+  padding:clamp(14px,3vw,30px);
+  background:
+    radial-gradient(circle at 50% 12%, rgba(255,210,116,.08), transparent 28%),
+    linear-gradient(180deg,rgba(92,12,55,.18),rgba(20,3,13,.25));
+}
+.invite-card{
+  width:min(100%,500px);
+  padding:34px 30px 34px;
+  background:
+    linear-gradient(180deg,rgba(82,8,48,.98),rgba(49,5,30,.98));
+  border:2px solid #c99a43;
+  border-radius:4px;
+  box-shadow:
+    0 0 0 5px rgba(199,155,72,.10),
+    0 0 0 8px rgba(70,8,39,.9),
+    0 28px 80px rgba(0,0,0,.62),
+    inset 0 0 55px rgba(255,206,105,.06);
+}
+/* Rich gold strips inspired by the opening box */
+.invite-card::before,
+.invite-card::after{
+  content:"";
+  position:absolute;
+  left:8px; right:8px;
+  height:9px;
+  z-index:7;
+  border-radius:2px;
+  background:linear-gradient(90deg,#8f6222,#f7df9b 18%,#c89b45 50%,#f7df9b 82%,#8f6222);
+  box-shadow:0 1px 0 rgba(255,255,255,.35),0 0 12px rgba(236,188,83,.2);
+}
+.invite-card::before{top:8px}
+.invite-card::after{bottom:8px}
+.gold-frame{
+  inset:16px;
+  border:1px solid rgba(231,194,111,.78);
+  border-radius:2px;
+}
+.corner svg path{stroke:#e5bd69!important}
+.corner svg circle{fill:#e5bd69!important}
+.eyebrow,.subtitle,.footer,.address,.host,.time{color:#e7c981!important}
+.title-flourish,.ornament{color:#f2d48c!important}
+#titleText,.names .line1,.names .line2,.names>span,.date,.venue{
+  color:#f6d98d!important;
+  text-shadow:0 1px 0 #5c3511,0 0 12px rgba(236,188,83,.12);
+}
+.guest{color:#f3d995!important}
+.details{border-color:rgba(214,170,79,.48)!important}
+.location,.share-btn{
+  background:linear-gradient(135deg,#8d5b1d,#d3a64c 45%,#8d5b1d)!important;
+  color:#2d071c!important;
+  border:1px solid #f4d993!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.4)!important;
+}
+.share-btn:hover,.location:hover{filter:brightness(1.08)}
+.personalize label{color:#e9c979!important}
+.personalize input{
+  background:#2d061c!important;color:#f8e8b5!important;border-color:#c99a43!important;
+}
+.personalize button{
+  background:linear-gradient(135deg,#9a6724,#e0b75e)!important;color:#2d071c!important;border-color:#f0d68e!important;
+}
+/* Guests should never see the sharing control. The owner/base page can still use it. */
+body.shared-invite .share-row{display:none!important}
+@media(max-width:520px){
+ .invite-card{padding:30px 21px 32px}
+ .invite-card::before,.invite-card::after{left:7px;right:7px;height:8px}
+ .gold-frame{inset:14px}
+}
